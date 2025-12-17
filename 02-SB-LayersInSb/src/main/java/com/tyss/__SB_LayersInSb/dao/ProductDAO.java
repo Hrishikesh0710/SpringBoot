@@ -23,27 +23,9 @@ public class ProductDAO {
 	}
 
 	
-	public Product update(Integer pid, Product product) {
-		Product dbProd = getById(pid);
-
-				if (product.getName() != null)
-					dbProd.setName(product.getName());
-				if (product.getPrice() != null)
-					dbProd.setPrice(product.getPrice());
-				if (product.getDescription() != null)
-					dbProd.setDescription(product.getDescription());
-				if (product.getColor() != null)
-					dbProd.setColor(product.getColor());
-		
-				return save(dbProd);
+	public void delete(Product product) {
+		productRepository.delete(product);
 	}
 
-	public String deleteById(Integer pid) {
-		productRepository.deleteById(pid);
-		return "Deleted";
-	}
-	
-	
-	
 
 }

@@ -3,6 +3,10 @@ package com.tyss.__SB_LayersInSb.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.tyss.__SB_LayersInSb.dao.ProductDAO;
@@ -31,11 +35,48 @@ public class ProductService {
 	}
 	
 	public Product updateProduct(Integer pid, Product product) {
-        return productDAO.update(pid, product);
+		Product dbProd = productDAO.getById(pid);
+
+		if (product.getName() != null)
+			dbProd.setName(product.getName());
+		if (product.getPrice() != null)
+			dbProd.setPrice(product.getPrice());
+		if (product.getDescription() != null)
+			dbProd.setDescription(product.getDescription());
+		if (product.getColor() != null)
+			dbProd.setColor(product.getColor());
+
+		return productDAO.save(dbProd);
     }
 
 	public String deleteById(Integer id) {
-		return productDAO.deleteById(id);
+				Product byId = productDAO.getById(id);
+				productDAO.delete(byId);
+				return "Deleted";
 		
 	}
+
+	public List<Product> fetchByPage(Integer pageNumber) {
+				Pageable pageable = PageRequest.of(pageNumber - 1, 10);
+				Page<Product> all = productRepository.findAll(pageable);
+				List<Product> products = all.toList();
+
+		return products;
+	}
+
+	   public List<Product> sortProducts(String param, String order) {
+			if (order != null && order.equalsIgnoreCase("desc")) {
+				return productRepository.findAll(Sort.by(param).descending());// sort in ascending order by default
+			}
+			return productRepository.findAll(Sort.by(param).ascending());
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

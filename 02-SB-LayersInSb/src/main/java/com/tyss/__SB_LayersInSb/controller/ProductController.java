@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.__SB_LayersInSb.model.Product;
@@ -47,6 +47,21 @@ public class ProductController {
 	public String deleteProduct(@PathVariable Integer id) {
 		return productService.deleteById(id);
 	}
+    
+    @GetMapping("/page")
+	public List<Product> fetchByPage(@RequestParam Integer pageNumber) {
+		List<Product> products = productService.fetchByPage(pageNumber);
+		return products;
+	}
+   
+ 	@GetMapping("/sort")
+ 	public List<Product> sortRecords(@RequestParam(required = false, defaultValue = "price") String param,
+ 			@RequestParam(required = false) String order) {
+ 		return productService.sortProducts(param, order);
+ 	}
+
+ 	
+ 
     
     
     
