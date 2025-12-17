@@ -66,7 +66,7 @@ public class ProductService {
 
 	   public List<Product> sortProducts(String param, String order) {
 			if (order != null && order.equalsIgnoreCase("desc")) {
-				return productRepository.findAll(Sort.by(param).descending());// sort in ascending order by default
+				return productRepository.findAll(Sort.by(param).descending());
 			}
 			return productRepository.findAll(Sort.by(param).ascending());
 		}
