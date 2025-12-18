@@ -2,7 +2,9 @@ package com.tyss.__SB_LayersInSb.service;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.tyss.__SB_LayersInSb.dao.ProductDAO;
+import com.tyss.__SB_LayersInSb.dto.FilterDTO;
 import com.tyss.__SB_LayersInSb.model.Product;
 import com.tyss.__SB_LayersInSb.repository.ProductRepository;
 
@@ -70,9 +73,27 @@ public class ProductService {
 			}
 			return productRepository.findAll(Sort.by(param).ascending());
 		}
+
+	   public List<Product> filter(FilterDTO filterDTO) {
+		   Product product = new Product();
+
+			BeanUtils.copyProperties(filterDTO, product);
+
+			Example<Product> example = Example.of(product);
+
+			List<Product> products = productRepository.findAll(example);
+
+			return products;
+	   }
 	
 	
-	
+	   public List<Product> priceRange(Double fPrice,Double tPrice) {
+			return productRepository.getProductsPriceRange(fPrice, tPrice);
+		}
+		
+		public List<Product> searchByName(String name) {
+			return productRepository.findByNameContainingIgnoreCase(name);
+		}
 	
 	
 	

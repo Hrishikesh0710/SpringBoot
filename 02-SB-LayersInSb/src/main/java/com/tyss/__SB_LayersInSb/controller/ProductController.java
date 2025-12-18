@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tyss.__SB_LayersInSb.dto.FilterDTO;
 import com.tyss.__SB_LayersInSb.model.Product;
 import com.tyss.__SB_LayersInSb.service.ProductService;
 
@@ -60,14 +61,26 @@ public class ProductController {
  		return productService.sortProducts(param, order);
  	}
 
- 	
+	@GetMapping("/filter")
+	public List<Product> filterProducts(@RequestBody FilterDTO filterDTO) {
+		List<Product> products = productService.filter(filterDTO);
+		return products;
+	}
  
+	@GetMapping("/range")
+	public List<Product> productByPriceRange(@RequestParam Double fPrice, @RequestParam Double tPrice) {
+		return productService.priceRange(fPrice, tPrice);
+	}
+
+	@GetMapping("/search")
+	public List<Product> searchByName(@RequestParam String name) {
+		return productService.searchByName(name);
     
     
     
     
     
-    
+	}
     
     
 }
