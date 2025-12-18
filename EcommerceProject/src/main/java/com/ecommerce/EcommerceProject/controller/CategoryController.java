@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ecommerce.EcommerceProject.entity.Category;
 import com.ecommerce.EcommerceProject.service.CategoryService;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
