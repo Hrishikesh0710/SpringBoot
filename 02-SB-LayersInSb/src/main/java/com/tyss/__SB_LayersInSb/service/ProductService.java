@@ -94,6 +94,10 @@ public class ProductService {
 		public List<Product> searchByName(String name) {
 			return productRepository.findByNameContainingIgnoreCase(name);
 		}
+
+		public List<Product> searchByNameAndPrice(String name, Double price) {
+			return productRepository.findByNameAndPrice(name, price);
+		}
 	
 	
 	

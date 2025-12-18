@@ -75,9 +75,12 @@ public class ProductController {
 	@GetMapping("/search")
 	public List<Product> searchByName(@RequestParam String name) {
 		return productService.searchByName(name);
+	}
     
     
-    
+    @GetMapping("/NameAndPrice")
+    public List<Product> searchByNameAndPrice(@RequestParam String name,@RequestParam Double price) {
+		return productService.searchByNameAndPrice(name,price);
     
     
 	}

@@ -21,7 +21,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	public List<Product> getByNameAndPrice(String prodName, Double prodPrice);
 
 	// custom methods ==> No need of JPQL/HQL, but we need to follow method naming
-	// convention -->
+	// Follow convention -->
 	// method Name should start from findBy (to add condition we have to use the
 	// states of entity object with convention again)
 	public List<Product> findByNameAndPrice(String name, Double price);
