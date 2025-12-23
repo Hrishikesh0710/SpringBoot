@@ -1,0 +1,21 @@
+package com.gop.GangsOfPav.dto;
+
+public class LoginResponseDTO {
+
+    private Long userId;
+    private String name;
+    private String email;
+    private String token;
+
+    public LoginResponseDTO(Long userId, String name, String email, String token) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.token = token;
+    }
+
+    public Long getUserId() { return userId; }
+    public String getName() { return name; }
+    public String getEmail() { return email; }
+    public String getToken() { return token; }
+}
